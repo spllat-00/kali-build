@@ -1,0 +1,19 @@
+---
+# tasks file for Shelloox
+
+- name: "Cloning Shelloox Repo"
+  git:
+    repo: "https://github.com/spllat-00/Shelloox"
+    dest: "{{ shelloox_base_path }}"
+  become: yes
+
+- name: "(Shelloox) Searching files for Permissions"
+  shell: "find {{ shelloox_base_path }} -type f -name \"*.sh\" | grep -v \"files\""
+  register: sh_files_raw
+
+- name: "(Shelloox) Giving Permissions to .sh files"
+  ansible.builtin.file: 
+    path: "{{ item }}"
+    mode: "0755"
+  loop: "{{ sh_files_raw.stdout_lines }}"
+  become: yes

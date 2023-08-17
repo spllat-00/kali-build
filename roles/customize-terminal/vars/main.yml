@@ -1,0 +1,5 @@
+---
+# vars file for customize-terminal
+
+nerd_fonts_base_github: "https://github.com/ryanoasis/nerd-fonts/releases/"
+fonts_base_path: "/usr/local/share/fonts"

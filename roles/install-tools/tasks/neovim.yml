@@ -1,0 +1,32 @@
+---
+# tasks file for neovim
+
+- name: "Cloning NeoVim Repo"
+  git:
+    repo: "https://github.com/neovim/neovim"
+    dest: "/tmp/neovim"
+    version: stable
+
+- name: "Build Neovim"
+  make:
+    chdir: /tmp/neovim
+    target: CMAKE_BUILD_TYPE=RelWithDebInfo
+  become: yes
+
+- name: Install Neovim
+  make:
+    chdir: /tmp/neovim
+    target: install
+  become: yes
+
+- name: "Deleting Neovim GitHub Repo"
+  file:
+    path: "/tmp/neovim"
+    state: absent
+  become: yes
+
+- name: "Cloning NvChad Repo"
+  git:
+    repo: "https://github.com/NvChad/NvChad"
+    dest: "~/.config/nvim"
+    depth: 1

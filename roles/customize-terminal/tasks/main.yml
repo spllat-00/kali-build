@@ -1,0 +1,13 @@
+---
+# tasks file for customize-terminal
+- name: "Copy zshRC"
+  copy:
+    src: "{{ role_path }}/files/.zshrc"
+    dest: "{{ ansible_env.HOME }}"
+
+- import_tasks: "{{ role_path }}/tasks/NerdFonts.yml"
+
+#- name: "Copying Terminal Settings"
+  #copy:
+    #src: "{{ role_path }}/files/qterminal.ini"
+    #dest: "{{ ansible_env.HOME }}/.config/qterminal.org"

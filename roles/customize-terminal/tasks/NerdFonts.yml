@@ -1,0 +1,29 @@
+---
+# tasks file for nerdFonts
+
+- name: "(JetBrains Nerd Font) Find latest release"
+  uri:
+    url: "{{ nerd_fonts_base_github }}latest"
+    return_content: yes
+  register: release_info
+
+- name: "(JetBrains Nerd Font) Download latest release"
+  get_url:
+    url: "{{ nerd_fonts_base_github }}download/{{ release_info.url.split('/') | last }}/JetBrainsMono.zip"
+    dest: "/tmp"
+
+- name: "(JetBrains Nerd Font) Create Directory"
+  ansible.builtin.file:
+    path: "{{ fonts_base_path }}/JetBrains"
+    state: directory
+  become: yes
+
+- name: "(JetBrains Nerd Font) Unzipping"
+  ansible.builtin.unarchive:
+    src: "/tmp/JetBrainsMono.zip"
+    dest: "{{ fonts_base_path }}/JetBrains"
+  become: yes
+
+- name: "(JetBrains Nerd Font) Update Fontconfig Library"
+  ansible.builtin.command: "fc-cache -fv"
+  become: yes

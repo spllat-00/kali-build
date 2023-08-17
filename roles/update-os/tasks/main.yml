@@ -1,0 +1,12 @@
+---
+# tasks file for update-os
+
+- name: "(OS) Update Package List"
+  ansible.builtin.apt:
+    update_cache: yes
+  become: true
+
+- name: "(OS) Upgrade Package"
+  ansible.builtin.apt:
+    upgrade: safe
+  become: yes

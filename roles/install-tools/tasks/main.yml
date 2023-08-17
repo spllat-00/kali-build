@@ -1,0 +1,11 @@
+---
+# tasks file for install-tools
+
+- name: "Install apt packages"
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+
+- import_tasks: "{{ role_path }}/tasks/Shelloox.yml"
+- import_tasks: "{{ role_path }}/tasks/neovim.yml"

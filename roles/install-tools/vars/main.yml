@@ -1,0 +1,14 @@
+---
+# vars file for install-tools
+
+packages:
+  - xclip
+  - ninja-build
+  - gettext
+  - cmake
+  - unzip
+  - curl
+  - gobuster
+  - ghidra
+
+shelloox_base_path: "/opt/Shelloox"

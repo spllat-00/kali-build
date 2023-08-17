@@ -1,0 +1,13 @@
+---
+# Runner Code
+- name: "Customizing Kali"
+  hosts: localhost
+  connection: local
+  #tasks:
+    #- name: "Check Var"
+      #debug:
+        #msg: "{{ playbook_dir }}/roles/install-tools/tasks/neovim.yml"
+  roles:
+    - role: "roles/update-os"
+    - role: "roles/customize-terminal"
+    - role: "roles/install-tools"
